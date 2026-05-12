@@ -33,8 +33,7 @@ class RowToNodeParserTest {
         String line = ";;;08.12;0810*;\"Operation of gravel and sand pits; mining of clays and kaolin\";;;;;;;;;;;;;;";
         List<String> actual = rowToNodeParser.splitIntoColumns(line);
         List<String> expected = List.of("", "", "",
-                "08.12", "0810*", "Operation of gravel and sand pits; mining of clays and kaolin",
-                "", "", "", "", "", "", "", "", "", "", "", "", ""
+                "08.12", "0810*", "Operation of gravel and sand pits; mining of clays and kaolin"
         );
         assertEquals(expected, actual);
     }

@@ -33,7 +33,7 @@ public class RowToNodeParser {
 
     List<String> splitIntoColumns(String line) {
         List<String> columns = new ArrayList<>();
-        String restOfString = line;
+        String restOfString = line.replaceFirst(";*$", ";");
         while (!restOfString.isEmpty()) {
             if (restOfString.startsWith(quote)) {
                 int closingQuoteIndex = restOfString.indexOf(quote, 1);
