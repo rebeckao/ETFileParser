@@ -1,8 +1,13 @@
 import model.AgricultureNode;
-import parser.CsvToTreeParser;
+import service.TreeService;
 
-void main() throws IOException {
-    List<String> lines = Files.readAllLines(Path.of("input.csv"));
-    AgricultureNode rootNode = new CsvToTreeParser().parseFileContent(lines);
-    IO.println(rootNode);
+void main() {
+    TreeService treeService = new TreeService("input.csv");
+    treeService.printTree();
+    List<AgricultureNode> foundNodes = treeService.searchNode("Activities of extraterritorial organisations and bodies");
+    for (AgricultureNode foundNode: foundNodes) {
+        IO.println("Found node:");
+        treeService.printTree(foundNode);
+    }
+
 }
