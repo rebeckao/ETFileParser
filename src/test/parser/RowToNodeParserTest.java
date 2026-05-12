@@ -12,13 +12,14 @@ import model.AgricultureNode;
 
 class RowToNodeParserTest {
 
-    private final RowToNodeParser rowToNodeParser = new RowToNodeParser(5, "\"", ";");
+    private final RowToNodeParser rowToNodeParser = new RowToNodeParser("\"", ";");
 
     @ParameterizedTest
     @CsvSource(value = {
             "A;;;;;AGRICULTURE, FORESTRY AND FISHING;;;;;;;;;;;;;;|                                             1|  AGRICULTURE, FORESTRY AND FISHING",
             ";01;;;;Crop and animal production, hunting and related service activities;;;;;;;;;;;;;;|           2|  Crop and animal production, hunting and related service activities",
             ";;01.1;;;Growing of non-perennial crops;;;;;;;;;;;;;;|                                             3|  Growing of non-perennial crops",
+            ";;01.1;;;;;;Growing of non-perennial crops;;;;;;;;;;;|                                             3|  Growing of non-perennial crops",
             ";;;08.12;0810*;\"Operation of gravel and sand pits; mining of clays and kaolin\";;;;;;;;;;;;;;|    4|  Operation of gravel and sand pits; mining of clays and kaolin",
     }, delimiter = '|')
     void testParseLine(String line, int expectedLevel, String expectedLabel) {

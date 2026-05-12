@@ -8,7 +8,7 @@ import java.util.List;
 import model.AgricultureNode;
 
 public class CsvToTreeParser {
-    private final RowToNodeParser lineToNodeParser = new RowToNodeParser(5, "\"", ";");
+    private final RowToNodeParser lineToNodeParser = new RowToNodeParser("\"", ";");
 
     public AgricultureNode parseFileContent(List<String> lines) {
         AgricultureNode rootNode = new AgricultureNode(null, 0, new ArrayList<>());

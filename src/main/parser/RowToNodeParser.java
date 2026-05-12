@@ -6,24 +6,29 @@ import java.util.List;
 import model.AgricultureNode;
 
 public class RowToNodeParser {
-    private final int labelColumn;
     private final String quote;
     private final String delimiter;
 
-    RowToNodeParser(int labelColumn, String quote, String delimiter) {
-        this.labelColumn = labelColumn;
+    RowToNodeParser(String quote, String delimiter) {
         this.quote = quote;
         this.delimiter = delimiter;
     }
 
     AgricultureNode parseLine(String line) {
         List<String> columns = splitIntoColumns(line);
-        if (columns.size() < labelColumn - 1) {
-            throw new IllegalStateException();
-        }
-        String label = columns.get(labelColumn);
+        String label = resolveLabel(columns);
         int level = resolveLevel(columns);
         return new AgricultureNode(label, level, new ArrayList<>());
+    }
+
+    private String resolveLabel(List<String> columns) {
+        for (int col = columns.size() - 1; col >= 0; col--) {
+            String columnValue = columns.get(col);
+            if (columnValue != null && !columnValue.isEmpty()) {
+                return columnValue;
+            }
+        }
+        throw new IllegalStateException();
     }
 
     List<String> splitIntoColumns(String line) {
